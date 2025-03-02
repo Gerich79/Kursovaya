@@ -30,7 +30,7 @@
             </div>
         </div>
         
-        <div class="main-content">
+        <div class="main-content collapsed">
             <div class="specs-section">
                 <h3>Технические характеристики</h3>
                 <textarea rows="10" readonly>Графический процессор: AD104
@@ -62,12 +62,14 @@
         </div>
     </div>
 
+
     <script>
-        document.querySelector('.expand-btn').addEventListener('click', function() {
-            const mainContent = document.querySelector('.main-content');
-            const button = document.querySelector('.expand-btn');
-            mainContent.classList.toggle('collapsed');
-            button.textContent = mainContent.classList.contains('collapsed') ? '▼' : '▲';
+        document.querySelectorAll('.expand-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const mainContent = this.closest('.form-menu').querySelector('.main-content');
+                mainContent.classList.toggle('collapsed');
+                this.textContent = mainContent.classList.contains('collapsed') ? '▲' : '▼';
+            });
         });
     </script>
 </body>
