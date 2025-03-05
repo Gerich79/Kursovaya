@@ -1,0 +1,148 @@
+--Роли
+INSERT INTO roles (id_role, name, description) VALUES (1, 'Пользователь', 'Пользователь системы');
+INSERT INTO roles (id_role, name, description) VALUES (2, 'Администратор', 'Админ системы');
+
+--Категории
+INSERT INTO categories(id_categories, name)VALUES (1, 'Процессоры');
+INSERT INTO categories(id_categories, name)VALUES (2, 'Видеокарты');
+INSERT INTO categories(id_categories, name)VALUES (3, 'Материнские платы');
+INSERT INTO categories(id_categories, name)VALUES (4, 'Блоки питания');
+INSERT INTO categories(id_categories, name)VALUES (5, 'Оперативная память');
+INSERT INTO categories(id_categories, name)VALUES (6, 'Жёсткие диски');
+INSERT INTO categories(id_categories, name)VALUES (7, 'Мониторы');
+INSERT INTO categories(id_categories, name)VALUES (8, 'Перефирия');
+
+--Адреса
+INSERT INTO address(id_address, address) VALUES (1, 'Россия, г. Северск, Полевой пер., д. 10');
+INSERT INTO address(id_address, address) VALUES (2, 'Россия, г. Дербент, Луговая ул., д. 13');
+INSERT INTO address(id_address, address) VALUES (3, 'Россия, г. Йошкар-Ола, Железнодорожная ул., д. 3');
+
+
+--Пользователи
+INSERT INTO users(id_user, login, password, id_role)VALUES (1, 'Боб', 11111111, 1);
+INSERT INTO users(id_user, login, password, id_role)VALUES (2, 'Боб1', 22222222, 1);
+INSERT INTO users(id_user, login, password, id_role)VALUES (3, 'Боб2', 33333333, 1);
+INSERT INTO users(id_user, login, password, id_role)VALUES (4, 'Боб3', 44444444, 1);
+INSERT INTO users(id_user, login, password, id_role)VALUES (5, 'Боб4', 55555555, 1);
+INSERT INTO users(id_user, login, password, id_role)VALUES (6, 'БобГлава', 66666666, 2);
+
+--Комплектующие 
+--Видеокарты
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (1, 'NVIDIA GeForce RTX 3080','Описание видеокарты 1', '25-02-2025', 'Хорошее', 70000.00, 2, 1);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (2, 'AMD Radeon RX 6800 XT','Описание видеокарты 1', '25-02-2025', 'Плохое', 65000.10, 2, 2);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (3, 'NVIDIA GeForce GTX 1660 Super','Описание видеокарты 1', '25-02-2025', 'Плохое', 25000.30, 2, 2);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (4, 'AMD Radeon RX 5700 XT','Описание видеокарты 1', '25-02-2025', 'Нормальное', 30000.80, 2, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (5, 'NVIDIA GeForce RTX 3060 Ti','Описание видеокарты 1', '25-02-2025', 'Нормальное', 45000.70, 2, 3);
+
+--Процессоры
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (6, 'Intel Core i9-11900K','Описание проца 1', '25-02-2025', 'Хорошее', 45000.00, 1, 2);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (7, 'AMD Ryzen 7 5800X','Описание проца 2', '25-02-2025', 'Нормальное', 35000.00, 1, 2);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (8, 'Intel Core i5-10400','Описание проца 3', '25-02-2025', 'Отличное', 24000.00, 1, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (9, 'Intel Core i5-10400','Описание проца 4', '25-02-2025', 'Плохое', 20000.00, 1, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (10, 'Intel Pentium Gold G6400','Описание проца 5', '25-02-2025', 'Плохое', 10000.00, 1, 3);
+
+--Материнки
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (11, 'ASUS ROG Strix Z590-E Gaming WiFi','Описание материнки 1', '25-02-2025', 'Хорошее', 25000.00, 3, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (12, 'MSI B450 TOMAHAWK MAX','Описание материнки 2', '25-02-2025', 'Нормальное', 10000.00, 3, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (13, 'Gigabyte AORUS X570 Master','Описание материнки 3', '25-02-2025', 'Нормальное', 30000.00, 3, 2);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (14, 'ASRock B550 Steel Legend','Описание материнки 4', '25-02-2025', 'Нормальное', 12000.00, 3, 1);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (15, 'ASUS Prime H570-PLUS','Описание материнки 5', '25-02-2025', 'Хорошее', 15000.00, 3, 1);
+
+--Жескачи
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (16, 'Seagate Barracuda 2TB','Описание жескача 1', '25-02-2025', 'Нормальное', 5000.00, 6, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (17, 'Western Digital Blue 1TB','Описание жескача 2', '25-02-2025', 'Нормальное', 10000.00, 6, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (18, 'Toshiba X300 4TB','Описание жескача 3', '25-02-2025', 'Хорошее', 3500.00, 6, 2);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (19, 'HGST Deskstar NAS 6TB','Описание жескача 4', '25-02-2025', 'Хорошее', 12000.00, 6, 1);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (20, 'Samsung 870 EVO 1TB (SSD)','Описание жескача 5', '25-02-2025', 'Плохое', 7200.00, 6, 1);
+
+--Оперативная память
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (21, 'Corsair Vengeance LPX 16GB (2x8GB) DDR4 3200MHz','Описание оперативки 1', '25-02-2025', 'Хорошее', 7000.00, 5, 2);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (22, 'G.Skill Ripjaws V 16GB (2x8GB) DDR4 3600MHz','Описание оперативки 2', '25-02-2025', 'Нормальное', 8000.00, 5, 1);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (23, 'Kingston HyperX Fury 16GB (2x8GB) DDR4 2666MHz','Описание оперативки 3', '25-02-2025', 'Плохое', 6500.00, 5, 1);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (24, 'Crucial Ballistix 16GB (2x8GB) DDR4 3000MHz','Описание оперативки 4', '25-02-2025', 'Нормальное', 7500.00, 5, 2);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (25, 'Team T-Force Vulcan Z 16GB (2x8GB) DDR4 3200MHz','Описание оперативки 5', '25-02-2025', 'Хорошее', 6000.00, 5, 3);
+
+--Блоки питания
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (26, 'Corsair RM750x 750W','Описание оперативки 1', '25-02-2025', 'Нормальное', 12000.00, 4, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (27, 'Cooler Master V850 SFX Gold 850W','Описание оперативки 1', '25-02-2025', 'Хорошее', 11500.00, 4, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (28, 'ASUS ROG Strix 750W','Описание оперативки 1', '25-02-2025', 'Хорошее', 10000.00, 4, 1);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (29, 'FSP Hydro G Pro 850W','Описание оперативки 1', '25-02-2025', 'Нормальное', 9800.00, 4, 1);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (30, ' XPG Pylon 600W','Описание оперативки 1', '25-02-2025', 'Нормальное', 7000.00, 4, 2);
+
+--Мониторы
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (31, 'DEXP DF22N2','Описание оперативки 1', '25-02-2025', 'Нормальное', 6200.00, 7, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (32, 'Irbis SMARTVIEW IMVW22FV','Описание оперативки 1', '25-02-2025', 'Хорошее', 7499.00, 7, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (33, 'DEXP DF22N1','Описание оперативки 1', '25-02-2025', 'Хорошее', 7999.00, 7, 1);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (34, 'DEXP DF24N1','Описание оперативки 1', '25-02-2025', 'Нормальное', 8299.00, 7, 1);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (35, 'LG 22MR410-B','Описание оперативки 1', '25-02-2025', 'Нормальное', 8399.00, 7, 2);
+
+--Перефирия
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (36, 'Logitech K120 [920-002506/22]','Описание оперативки 1', '25-02-2025', 'Нормальное', 1399.00, 8, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (37, 'Logitech B100 [910-006605] ','Описание оперативки 1', '25-02-2025', 'Хорошее', 599.00, 8, 3);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (38, 'Genius DX-120','Описание оперативки 1', '25-02-2025', 'Хорошее', 550.00, 8, 1);
+INSERT INTO Components(id_component, name, description, date_added, technical_conditions, cost, id_categories, id_address) VALUES (39, 'A4Tech Fstyler FK10 [1147528]','Описание оперативки 1', '25-02-2025', 'Нормальное', 1499.00, 8, 1);
+
+--Удалённые комплектующие
+INSERT INTO removed(id_remove, date_remove, reason, id_component)VALUES (1, '02.12.2020', 'Сломлся чип', 1);
+INSERT INTO removed(id_remove, date_remove, reason, id_component)VALUES (2, '07.09.2021', 'Сгорел', 6);
+INSERT INTO removed(id_remove, date_remove, reason, id_component)VALUES (3, '14.07.2019', 'Устарел', 12);
+INSERT INTO removed(id_remove, date_remove, reason, id_component)VALUES (4, '03.08.2020', 'Сгорел', 17);
+INSERT INTO removed(id_remove, date_remove, reason, id_component)VALUES (5, '02.11.2010', 'Сгорел', 23);
+INSERT INTO removed(id_remove, date_remove, reason, id_component)VALUES (6, '26.03.2016', 'Сломлся чип памяти', 28);
+INSERT INTO removed(id_remove, date_remove, reason, id_component)VALUES (7, '22.02.2023', 'Сгорел', 30);
+INSERT INTO removed(id_remove, date_remove, reason, id_component)VALUES (8, '06.08.2019', 'Устарел', 13);
+INSERT INTO removed(id_remove, date_remove, reason, id_component)VALUES (9, '01.06.2018', 'Устарел', 9);
+INSERT INTO removed(id_remove, date_remove, reason, id_component)VALUES (10, '13.09.2024', 'Устарел', 39);
+
+--Журнал поломок
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (1, 1, '25.02.2021');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (2, 1, '25.02.2022');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (3, 1, '25.02.2023');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (4, 1, '25.02.2024');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (5, 1, '25.02.2025');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (6, 2, '12.01.2023');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (7, 2, '30.12.2025');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (8, 3, '25.02.2023');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (9, 3, '25.02.2024');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (10, 3, '25.02.2025');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (11, 4, '25.02.2023');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (12, 6, '25.02.2022');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (13, 7, '15.02.2023');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (14, 8, '25.02.2020');
+INSERT INTO breakdownlog(id_breakdown, id_component, date_last_breakdown)VALUES (15, 10, '25.04.2023');
+
+--Заявления на ремонт
+INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration, id_component)VALUES (1, 1, 'Не работает', '26.02.2025', 1);
+INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration, id_component)VALUES (2, 1, 'Греется', '26.02.2025', 1);
+INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration, id_component)VALUES (3, 1, 'Не работает', '26.02.2025', 1);
+INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration, id_component)VALUES (4, 1, 'Не работает', '26.02.2025', 2);
+INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration, id_component)VALUES (5, 2, 'Не работает', '26.02.2025', 3);
+INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration, id_component)VALUES (6, 2, 'Не работает', '26.02.2025', 6);
+INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration, id_component)VALUES (7, 3, 'Не работает', '26.02.2025', 12);
+INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration, id_component)VALUES (8, 3, 'Греется', '26.02.2025', 1);
+INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration, id_component)VALUES (9, 3, 'Греется', '26.02.2025', 4);
+INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration, id_component)VALUES (10, 1, 'Греется', '26.02.2025', 5);
+
+--Оценки
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (1, 1, 1, 1);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (2, 1, 2, 10);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (3, 1, 3, 10);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (4, 1, 4, 2);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (5, 2, 5, 5);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (6, 2, 6, 7);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (7, 3, 2, 5);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (8, 3, 2, 2);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (9, 3, 3, 10);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (10, 4, 3, 1);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (11, 4, 2, 10);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (12, 4, 2, 2);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (13, 4, 2, 5);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (14, 1, 2, 3);
+INSERT INTO rating(id_rating, id_component, id_user, grade)VALUES (15, 1, 6, 2);
+
+--Отремонтированные
+INSERT INTO repaired(id_repair, date_repair, description, id_component)VALUES (1, '21.11.2013', 'Отремонтирован', 1);
+INSERT INTO repaired(id_repair, date_repair, description, id_component)VALUES (2, '22.07.2011', 'Отремонтирован', 2);
+INSERT INTO repaired(id_repair, date_repair, description, id_component)VALUES (3, '17.01.2017', 'Отремонтирован', 3);
+INSERT INTO repaired(id_repair, date_repair, description, id_component)VALUES (4, '27.02.2019', 'Отремонтирован', 4);
+INSERT INTO repaired(id_repair, date_repair, description, id_component)VALUES (5, '22.07.2013', 'Отремонтирован', 5);
