@@ -1,0 +1,74 @@
+:root {
+    --background: #393E41;
+    --block: #587B7F;
+    --text: #FFFFFF;
+    --border: #393E41;
+    --accent: #E2C044;
+    --accent-hover: #c9ab3d;
+    --input-bg: #D3D0CB;
+    --input-text: #393E41;
+}
+
+body {
+    background-color: var(--background);
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.declaration-container {
+    background-color: var(--block);
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.declaration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.declaration-form select,
+.declaration-form input,
+.declaration-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    box-sizing: border-box;
+}
+
+.declaration-form label {
+    color: var(--text);
+    font-weight: 500;
+}
+
+.declaration-form button {
+    width: 100%;
+    background-color: var(--accent);
+    color: var(--input-text);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.declaration-form button:hover {
+    background-color: var(--accent-hover);
+}
+
+h2 {
+    color: var(--text);
+    margin-bottom: 20px;
+} 
