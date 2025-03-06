@@ -1,72 +1,72 @@
 --Создание БД
-CREATE TABLE Roles (
-id_role SERIAL PRIMARY KEY Check (id_role Between 1 AND 999),
-name varchar(20) not null UNIQUE,
-description varchar(20) not null
-);
+    CREATE TABLE Roles (
+    id_role SERIAL PRIMARY KEY Check (id_role Between 1 AND 999),
+    name varchar(20) not null UNIQUE,
+    description varchar(20) not null
+    );
 
-Create TABLE Users (
-id_user SERIAL PRIMARY KEY Check (id_user Between 1 AND 999),
-login varchar(20) not null UNIQUE,
-password varchar(15) not null,
-id_role int, Foreign Key(id_role) REFERENCES Roles(id_role)
-);
+    Create TABLE Users (
+    id_user SERIAL PRIMARY KEY Check (id_user Between 1 AND 999),
+    login varchar(20) not null UNIQUE,
+    password varchar(15) not null,
+    id_role int, Foreign Key(id_role) REFERENCES Roles(id_role)
+    );
 
-CREATE TABLE Categories(
-id_categories SERIAL PRIMARY KEY Check (id_categories Between 1 AND 999),
-name varchar(20) not null UNIQUE
-);
+    CREATE TABLE Categories(
+    id_categories SERIAL PRIMARY KEY Check (id_categories Between 1 AND 999),
+    name varchar(20) not null UNIQUE
+    );
 
-CREATE TABLE Address(
-id_adreess SERIAL PRIMARY KEY Check (id_adreess Between 1 AND 999),
-address varchar(100) not null UNIQUE
-);
+    CREATE TABLE Address(
+    id_adreess SERIAL PRIMARY KEY Check (id_adreess Between 1 AND 999),
+    address varchar(100) not null UNIQUE
+    );
 
-CREATE TABLE Componenets (
-id_component SERIAL PRIMARY KEY Check (id_component Between 1 AND 999),
-name varchar(50) not null,
-description varchar(100),
-date_added Date not null,
-technical_conditions varchar(20) not null,
-cost numeric(8) not null CHECK(cost Between 0 AND 99999.99),
-id_categories int, Foreign Key(id_categories) REFERENCES Categories(id_categories),
-id_adreess int,  Foreign Key(id_adreess) REFERENCES Address(id_adreess)
-);
+    CREATE TABLE Componenets (
+    id_component SERIAL PRIMARY KEY Check (id_component Between 1 AND 999),
+    name varchar(50) not null,
+    description varchar(100),
+    date_added Date not null,
+    technical_conditions varchar(20) not null,
+    cost numeric(8) not null CHECK(cost Between 0 AND 99999.99),
+    id_categories int, Foreign Key(id_categories) REFERENCES Categories(id_categories),
+    id_adreess int,  Foreign Key(id_adreess) REFERENCES Address(id_adreess)
+    );
 
-Create TABLE Declarations (
-id_declaration SERIAL PRIMARY KEY Check (id_declaration Between 1 AND 999),
-id_user int, Foreign Key(id_user) REFERENCES Users(id_user),
-declaration varchar(50) not null,
-date_declaration DATE NOT NULL,
-id_component int, Foreign Key(id_component) REFERENCES Componenets(id_component)
-);
+    Create TABLE Declarations (
+    id_declaration SERIAL PRIMARY KEY Check (id_declaration Between 1 AND 999),
+    id_user int, Foreign Key(id_user) REFERENCES Users(id_user),
+    declaration varchar(50) not null,
+    date_declaration DATE NOT NULL,
+    id_component int, Foreign Key(id_component) REFERENCES Componenets(id_component)
+    );
 
-CREATE TABLE Repaired (
-id_repair SERIAL PRIMARY KEY Check (id_repair Between 1 AND 999),
-date_repair date not null,
-description varchar(50),
-id_component int, Foreign Key(id_component) REFERENCES Componenets(id_component)
-);
+    CREATE TABLE Repaired (
+    id_repair SERIAL PRIMARY KEY Check (id_repair Between 1 AND 999),
+    date_repair date not null,
+    description varchar(50),
+    id_component int, Foreign Key(id_component) REFERENCES Componenets(id_component)
+    );
 
-Create TABLE Rating (
-id_rating SERIAL PRIMARY KEY Check (id_rating Between 1 AND 999),
-id_component int, Foreign Key(id_component) REFERENCES Componenets(id_component),
-id_user int, Foreign Key(id_user) REFERENCES Users(id_user),
-grade int,Check (grade Between 1 AND 10)
-);
+    Create TABLE Rating (
+    id_rating SERIAL PRIMARY KEY Check (id_rating Between 1 AND 999),
+    id_component int, Foreign Key(id_component) REFERENCES Componenets(id_component),
+    id_user int, Foreign Key(id_user) REFERENCES Users(id_user),
+    grade int,Check (grade Between 1 AND 10)
+    );
 
-CREATE TABLE BreakdownLog (
-id_breakdown SERIAL PRIMARY KEY Check (id_breakdown Between 1 AND 999),
-id_component int, Foreign Key(id_component) REFERENCES Componenets(id_component),
-date_last_breakdown date not null
-);
+    CREATE TABLE BreakdownLog (
+    id_breakdown SERIAL PRIMARY KEY Check (id_breakdown Between 1 AND 999),
+    id_component int, Foreign Key(id_component) REFERENCES Componenets(id_component),
+    date_last_breakdown date not null
+    );
 
-Create TABLE Removed (
-id_remove SERIAL PRIMARY KEY Check (id_remove Between 1 AND 999),
-date_remove date not null,
-reason varchar(50) not null,
-id_component int, Foreign Key(id_component) REFERENCES Componenets(id_component)
-);
+    Create TABLE Removed (
+    id_remove SERIAL PRIMARY KEY Check (id_remove Between 1 AND 999),
+    date_remove date not null,
+    reason varchar(50) not null,
+    id_component int, Foreign Key(id_component) REFERENCES Componenets(id_component)
+    );
 
 
 

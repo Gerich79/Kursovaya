@@ -52,8 +52,8 @@ unset($_SESSION['message'], $_SESSION['message_type']);
         </div>
         
         <div class="btns">
-            <a href="AddUser.php" class="back-button">← Назад</a>
-            <button type="submit" class="btn-edit"><img class="img3" src="../img/edit.png" alt="Сохранить"></button>
+            <button class="btn-back" onclick="window.location.href='AddUser.php'"><img class="img1" src="../img/arrow-return.png" alt="Назад"></button>
+            <button type="submit" class="btn-create">Изменить пароль</button>
         </div>
     </form>
 </div>

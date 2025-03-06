@@ -12,12 +12,6 @@ INSERT INTO categories(id_categories, name)VALUES (6, 'Жёсткие диски
 INSERT INTO categories(id_categories, name)VALUES (7, 'Мониторы');
 INSERT INTO categories(id_categories, name)VALUES (8, 'Перефирия');
 
---Адреса
-INSERT INTO address(id_address, address) VALUES (1, 'Россия, г. Северск, Полевой пер., д. 10');
-INSERT INTO address(id_address, address) VALUES (2, 'Россия, г. Дербент, Луговая ул., д. 13');
-INSERT INTO address(id_address, address) VALUES (3, 'Россия, г. Йошкар-Ола, Железнодорожная ул., д. 3');
-
-
 --Пользователи
 INSERT INTO users(id_user, login, password, id_role)VALUES (1, 'Боб', 11111111, 1);
 INSERT INTO users(id_user, login, password, id_role)VALUES (2, 'Боб1', 22222222, 1);

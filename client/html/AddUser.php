@@ -56,7 +56,7 @@ unset($_SESSION['message'], $_SESSION['message_type']);
     </div>
     
     <div class="btns">
-        <a href="Menu.html" class="back-button">← Назад</a>
+        <button class="btn-back" onclick="window.location.href='Menu.html'"><img class="img1" src="../img/arrow-return.png" alt="Назад"></button>
         <button type="button" class="btn-delete" onclick="deleteUser()"><img class="img2" src="../img/delete.png" alt="Удалить"></button>
         <button type="button" class="btn-plus" onclick="addUser()"><img class="img4" src="../img/plus.png" alt="Добавить"></button>
         <button type="button" class="btn-edit" onclick="changePassword()"><img class="img3" src="../img/edit.png" alt="Изменить пароль"></button>

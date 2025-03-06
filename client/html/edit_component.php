@@ -1,19 +1,42 @@
+<?php
+session_start();
+
+// Проверяем, авторизован ли пользователь
+if (!isset($_SESSION['user'])) {
+    header('Location: ../../index.php');
+    exit();
+}
+
+// Получаем название компонента из URL
+$name = $_GET['name'] ?? '';
+
+// Получаем сообщение об ошибке или успехе, если оно есть
+$message = $_SESSION['message'] ?? '';
+$messageType = $_SESSION['message_type'] ?? '';
+unset($_SESSION['message'], $_SESSION['message_type']);
+?>
 <!DOCTYPE html>
 <html lang="rus">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/Form.css">
-    <title>Form</title>
+    <title>Редактирование комплектующего</title>
 </head>
 <body>
     <div class="form-container">
-        <form method="POST" action="../../server/add_component.php" id="componentForm" onsubmit="return validateForm()">
+        <?php if ($message): ?>
+            <div class="message <?php echo $messageType; ?>">
+                <?php echo htmlspecialchars($message); ?>
+            </div>
+        <?php endif; ?>
+
+        <form method="POST" action="../../server/update_component.php" id="editForm" onsubmit="return validateForm()">
             <div class="form-menu">
                 <div class="top-row">
                     <div class="name-section">
-                        <h2>Название</h2>
-                        <input type="text" class="component-name" name="name" placeholder="Введите название" required>
+                        <h2>Название комплектующего</h2>
+                        <input type="text" class="component-name" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
                     </div>
                     <div class="category-select">
                         <h3>Категория</h3>
@@ -31,7 +54,7 @@
                     </div>
                     <div class="technical-status">
                         <h3>Техническое состояние</h3>
-                        <select name="technical_status" required>
+                        <select name="technical_conditions" required>
                             <option value="">Выберите состояние</option>
                             <option value="Рабочее">Рабочее</option>
                             <option value="Требует ремонта">Требует ремонта</option>
@@ -64,23 +87,24 @@
                 </div>
                 <div class="button-container">
                     <button type="button" class="btn-back" onclick="window.location.href='Menu.html'">Назад</button>
-                    <button type="button" class="edit-btn" onclick="window.location.href='edit_component.php'">Изменить</button>
-                    <button type="submit" class="add-btn">Добавить</button>
+                    <button type="submit" class="add-btn">Сохранить изменения</button>
                 </div>
             </div>
         </form>
     </div>
 
     <script>
-        // Добавляем обработчик для кнопки "Добавить"
-        document.querySelector('.add-btn').addEventListener('click', function() {
-            document.getElementById('componentForm').submit();
-        });
-
-        // Функция валидации формы
         function validateForm() {
+            const nameInput = document.querySelector('input[name="name"]');
             const costInput = document.querySelector('input[name="cost"]');
+            const name = nameInput.value.trim();
             const cost = parseFloat(costInput.value);
+            
+            if (!name) {
+                alert('Пожалуйста, введите название комплектующего');
+                nameInput.focus();
+                return false;
+            }
             
             if (cost > 999999) {
                 alert('Стоимость не может превышать 999999 рублей');
@@ -92,6 +116,16 @@
                 alert('Стоимость не может быть отрицательной');
                 costInput.value = 0;
                 return false;
+            }
+            
+            // Проверяем, что все обязательные поля заполнены
+            const requiredFields = document.querySelectorAll('[required]');
+            for (let field of requiredFields) {
+                if (!field.value.trim()) {
+                    alert('Пожалуйста, заполните все обязательные поля');
+                    field.focus();
+                    return false;
+                }
             }
             
             return true;
