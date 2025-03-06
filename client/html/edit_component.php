@@ -86,7 +86,7 @@ unset($_SESSION['message'], $_SESSION['message_type']);
                     </div>
                 </div>
                 <div class="button-container">
-                    <button type="button" class="btn-back" onclick="window.location.href='Menu.html'">Назад</button>
+                    <button type="button" class="btn-back" onclick="window.location.href='form.html'">Назад</button>
                     <button type="submit" class="add-btn">Сохранить изменения</button>
                 </div>
             </div>
