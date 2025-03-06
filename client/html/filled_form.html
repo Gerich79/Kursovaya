@@ -29,12 +29,11 @@
                 </select>
             </div>
         </div>
-        
         <div class="main-content collapsed">
             <div class="specs-section">
                 <h3>Технические характеристики</h3>
                 <textarea rows="10" readonly>Графический процессор: AD104
-Техпроцесс: 5 нм
+                Техпроцесс: 5 нм
 Количество транзисторов: 32 млрд
 Тактовая частота: 1920 МГц
 Память: 12 ГБ GDDR6X
@@ -49,10 +48,6 @@
                         <label>Дата ввода в эксплуатацию:</label>
                         <input type="date" value="2024-01-15" readonly>
                     </div>
-                    <div class="date-input">
-                        <label>Дата вывода:</label>
-                        <input type="date" value="2024-03-20" readonly>
-                    </div>
                 </div>
                 <div class="location-container">
                     <h3>Место нахождения</h3>
@@ -60,17 +55,16 @@
                 </div>
             </div>
         </div>
-    </div>
 
-
-    <script>
-        document.querySelectorAll('.expand-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const mainContent = this.closest('.form-menu').querySelector('.main-content');
-                mainContent.classList.toggle('collapsed');
-                this.textContent = mainContent.classList.contains('collapsed') ? '▲' : '▼';
+        <script>
+            document.querySelectorAll('.expand-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const mainContent = this.closest('.form-menu').querySelector('.main-content');
+                    mainContent.classList.toggle('collapsed');
+                    this.textContent = mainContent.classList.contains('collapsed') ? '▲' : '▼';
+                });
             });
-        });
-    </script>
+        </script>
+    </div>
 </body>
 </html> 
