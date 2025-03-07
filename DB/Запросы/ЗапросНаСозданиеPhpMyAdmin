@@ -56,13 +56,6 @@ CREATE TABLE Rating (
     grade INT
 );
 
-CREATE TABLE BreakdownLog (
-    id_breakdown INT AUTO_INCREMENT PRIMARY KEY,
-    id_component INT,
-    FOREIGN KEY (id_component) REFERENCES Components(id_component),
-    date_last_breakdown DATE NOT NULL
-);
-
 CREATE TABLE Removed (
     id_remove INT AUTO_INCREMENT PRIMARY KEY,
     date_remove DATE NOT NULL,
@@ -70,3 +63,47 @@ CREATE TABLE Removed (
     id_component INT,
     FOREIGN KEY (id_component) REFERENCES Components(id_component)
 );
+
+Запросы 
+
+Дни с последней поломки
+SELECT 
+    DATEDIFF(CURRENT_DATE, MAX(date_declaration)) as days_since_last_breakdown
+FROM 
+    Declarations
+WHERE 
+    declaration LIKE '%поломка%';
+
+Общее количество поломок
+SELECT 
+    COUNT(*) as total_breakdowns
+FROM 
+    Declarations
+WHERE 
+    declaration LIKE '%поломка%';
+
+Средняя оценка компонентов
+SELECT 
+    AVG(grade) as average_rating
+FROM 
+    Rating;
+
+Частота поломок
+SELECT 
+    c.id_component,
+    c.name,
+    COUNT(d.id_declaration) as total_breakdowns,
+    DATEDIFF(CURRENT_DATE, c.date_added) as days_in_use,
+    CASE 
+        WHEN COUNT(d.id_declaration) = 0 THEN 0
+        ELSE ROUND(DATEDIFF(CURRENT_DATE, c.date_added) / COUNT(d.id_declaration), 2)
+    END as average_days_between_breakdowns
+FROM 
+    Components c
+LEFT JOIN 
+    Declarations d ON c.id_component = d.id_component
+    AND d.declaration LIKE '%поломка%'
+GROUP BY 
+    c.id_component, c.name
+HAVING 
+    total_breakdowns > 0;
