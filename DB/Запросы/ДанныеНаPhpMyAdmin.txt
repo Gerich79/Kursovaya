@@ -124,7 +124,6 @@ INSERT INTO Components (name, description, date_added, technical_conditions, cos
 ('Pulsar Xlite V2', 'Тип: Мышь\nСенсор: PAW3370\nDPI: 19000\nВес: 59г\nПодключение: Проводное', '2023-11-15', 'Рабочее', 5999.99, 8, 'Серверная 1, Стойка 24'),
 ('Royal Kludge RK84', 'Тип: Клавиатура\nПереключатели: RK\nПодсветка: RGB\nПодключение: Bluetooth/USB', '2023-11-15', 'Рабочее', 8999.99, 8, 'Серверная 1, Стойка 24');
 
---Удалённые комплектующие
 -- Списанные комплектующие
 INSERT INTO removed(id_remove, date_remove, reason, id_component) VALUES 
 (1, '2024-01-15', 'Физическое повреждение процессора', 6),
@@ -162,7 +161,7 @@ INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration,
 (25, 5, 'Двойное срабатывание кнопок', '2024-03-22', 41);
 
 --Оценки
-INSERT INTO rating(id_rating, id_component, id_user, grade) VALUES 
+INSERT INTO rating(id_rating, id_component , id_user, grade) VALUES 
 (16, 5, 1, 9),  -- Оценка процессора Intel Core i5-13600K
 (17, 12, 2, 8), -- Оценка видеокарты NVIDIA GeForce RTX 4080
 (18, 23, 3, 7), -- Оценка материнской платы ASRock X670E Taichi

@@ -1,21 +1,19 @@
 <?php
-require_once '../../server/config/database.php';
+require_once '../../server/db_delete_page.php';
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$database", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+if (!$connect) {
+    die("Ошибка подключения: " . mysqli_connect_error());
+}
 
-    $query = "SELECT c.name as component_name, r.date_remove, r.reason 
-              FROM Removed r 
-              JOIN Components c ON r.id_component = c.id_component 
-              ORDER BY r.date_remove DESC";
-              
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-    
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch(PDOException $e) {
-    $error = 'Ошибка базы данных: ' . $e->getMessage();
+$query = "SELECT c.name as component_name, r.date_remove, r.reason 
+          FROM Removed r 
+          JOIN Components c ON r.id_component = c.id_component 
+          ORDER BY r.date_remove DESC";
+          
+$result = mysqli_query($connect, $query);
+
+if (!$result) {
+    $error = 'Ошибка базы данных: ' . mysqli_error($connect);
 }
 ?>
 <!DOCTYPE html>
@@ -34,8 +32,6 @@ try {
             </div>
             <h1 class="page-title">Списанные комплектующие</h1>
             <div class="tetx_container">
-                <p class="menu_text" id="login">Имя пользователя</p>
-                <p class="menu_text" id="role">Роль пользователя</p>
             </div>
         </div>
     </div>
@@ -53,13 +49,13 @@ try {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($results as $row): ?>
+                    <?php while ($row = mysqli_fetch_assoc($result)): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($row['component_name']); ?></td>
                             <td><?php echo date('d.m.Y', strtotime($row['date_remove'])); ?></td>
                             <td><?php echo htmlspecialchars($row['reason']); ?></td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php endwhile; ?>
                 </tbody>
             </table>
         <?php endif; ?>

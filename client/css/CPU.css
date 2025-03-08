@@ -2,39 +2,8 @@
 body {
     background-color: #393E41;
     margin: 0;
-    padding-top: 80px; /* Добавляем отступ сверху для фиксированного меню */
+    padding-top: 60px; /* Добавляем отступ сверху для фиксированного меню */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-/* Стили для верхнего меню */
-.menu-up {
-    position: fixed; /* Фиксируем меню */
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000; /* Обеспечиваем отображение поверх остального контента */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #587B7F;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.left-section {
-    flex: 1;
-}
-
-.page-title {
-    flex: 2;
-    text-align: center;
-    color: white;
-    margin: 0;
-}
-
-.tetx_container {
-    flex: 1;
-    text-align: right;
 }
 
 .back-button {
@@ -53,6 +22,15 @@ body {
 .menu_text {
     color: white;
     margin: 5px 0;
+}
+
+.page-title {
+    flex-grow: 1;
+    text-align: center;
+    color: white;
+    margin: 0;
+    font-size: 24px;
+    font-weight: normal;
 }
 
 /* Контейнер для форм */
@@ -75,7 +53,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Стилизация элементов верхней строки */
+/* Стили для верхней строки */
 .top-row {
     display: flex;
     justify-content: space-between;
@@ -85,17 +63,22 @@ body {
     height: 110px;
 }
 
-.name-section, .category-select, .technical-status {
+/* Общие стили для всех секций в верхней строке */
+.name-section, 
+.category-select, 
+.technical-status,
+.cost-section {
     flex: 1;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-/* Стили для заголовков */
+/* Стили для всех заголовков в верхней строке */
 .name-section h2, 
 .category-select h3, 
-.technical-status .status-header h3 {
+.technical-status .status-header h3,
+.cost-section h3 {
     margin-bottom: 15px;
     height: 35px;
     display: flex;
@@ -105,10 +88,11 @@ body {
     font-weight: normal;
 }
 
-/* Стили для полей ввода */
+/* Стили для всех полей ввода в верхней строке */
 .name-section input,
 .category-select select,
-.technical-status select {
+.technical-status select,
+.cost-section input {
     height: 45px;
     width: 100%;
     padding: 12px;
@@ -272,31 +256,41 @@ input:focus {
     outline: none;
 }
 
-/* Медиа-запрос для адаптивности */
-@media (max-width: 768px) {
-    body {
-        padding-top: 120px; /* Увеличиваем отступ для мобильной версии */
-    }
+/* Стили для верхнего меню */
+.menu-up {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    height: 90px; /* Добавляем явную высоту */
+    padding: 0 20px; /* Меняем padding, оставляем только горизонтальные отступы */
+    background-color: #587B7F;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
 
+.left-section {
+    width: 100px;
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
     .menu-up {
-        flex-direction: column;
-        gap: 10px;
         padding: 10px;
     }
-
-    .tetx_container {
-        text-align: center;
-    }
-
+    
     .page-title {
-        order: -1;
+        font-size: 20px;
     }
 
     .top-row {
         flex-direction: column;
+        height: auto;
     }
 
-    .name-section, .category-select, .technical-status {
+    .name-section, .category-select, .cost-section, .technical-status {
         width: 100%;
     }
 

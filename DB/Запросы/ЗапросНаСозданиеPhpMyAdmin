@@ -42,7 +42,7 @@ CREATE TABLE Declarations (
 CREATE TABLE Repaired (
     id_repair INT AUTO_INCREMENT PRIMARY KEY,
     date_repair DATE NOT NULL,
-    description VARCHAR(50),
+    description VARCHAR(255),
     id_component INT,
     FOREIGN KEY (id_component) REFERENCES Components(id_component)
 );

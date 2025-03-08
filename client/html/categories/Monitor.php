@@ -4,27 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/CPU.css?v=1.1">
-    <title>Процессоры</title>
+    <title>Мониторы</title>
 </head>
 <body>
-    <!-- Верхнее меню -->
     <div class="menu-up">
         <div class="left-section">
             <a href="../Menu.html" class="back-button">← Назад</a>
         </div>
-        <h1 class="page-title">Процессоры</h1>
+        <h1 class="page-title">Мониторы</h1>
     </div>
-    <!-- Контейнер для форм -->
     <div class="forms-container">
         <?php
-        // Подключение к базе данных
         require_once '../../../server/db.php';
 
-        // Получаем все процессоры
         $sql = "SELECT c.*, cat.name as category_name 
                 FROM Components c 
                 JOIN Categories cat ON c.id_categories = cat.id_categories 
-                WHERE cat.name = 'Процессоры'";
+                WHERE cat.name = 'Мониторы'";
         
         $result = $conn->query($sql);
 
@@ -79,13 +75,12 @@
         <?php
             }
         } else {
-            echo "<p style='color: white; text-align: center;'>Процессоры не найдены</p>";
+            echo "<p style='color: white; text-align: center;'>Мониторы не найдены</p>";
         }
         $conn->close();
         ?>
     </div>
 
-    <!-- Перемещаем скрипт в конец body и исправляем логику -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.expand-btn').forEach(button => {
@@ -105,4 +100,4 @@
         });
     </script>
 </body>
-</html>
+</html> 
