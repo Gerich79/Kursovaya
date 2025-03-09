@@ -34,8 +34,12 @@ $role = $result->fetch_assoc();
     <div class="sidenav" id="mySidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="Messages.php"><img src="img/warning.png" alt="warning" class="menu-icon"> Сообщения</a>
-        <a href="AddUser.php"><img src="img/system.png" alt="system" class="menu-icon"> Управление профилями</a>
-        <a href="form.html"><img src="img/system.png" alt="system" class="menu-icon"> Управление комплектующими</a>
+        
+        <?php if ($role['role_name'] === 'Администратор'): ?>
+            <a href="AddUser.php"><img src="img/system.png" alt="system" class="menu-icon"> Управление профилями</a>
+            <a href="form.html"><img src="img/system.png" alt="system" class="menu-icon"> Управление комплектующими</a>
+        <?php endif; ?>
+
         <a href="declaration.php"><img src="img/profile.png" alt="profile" class="menu-icon">Написать о поломке</a>
         <a href="rating.php"><img src="img/profile.png" alt="profile" class="menu-icon">Выставить оценку комплектующему</a>
         <a href="DeletedPage.php"><img src="img/profile.png" alt="profile" class="menu-icon">Списанные комплектующие</a>
