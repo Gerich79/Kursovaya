@@ -60,21 +60,21 @@ if ($result->num_rows > 0) {
     error_log("Пользователь найден и авторизован");
     error_log("Session data: " . print_r($_SESSION, true));
     
-    // Проверяем существование файла Menu.html
-    $menuPath = __DIR__ . '/../client/html/Menu.html';
-    error_log("Checking Menu.html at path: " . $menuPath);
+    // Проверяем существование файла Menu.php
+    $menuPath = __DIR__ . '/../client/html/Menu.php';
+    error_log("Checking Menu.php at path: " . $menuPath);
     
     if (!file_exists($menuPath)) {
-        error_log("Menu.html not found at: " . $menuPath);
-        $_SESSION['error'] = 'Ошибка: файл Menu.html не найден';
+        error_log("Menu.php not found at: " . $menuPath);
+        $_SESSION['error'] = 'Ошибка: файл Menu.php не найден';
         header('Location: ../index.php');
         exit();
     }
     
-    error_log("Menu.html found, redirecting...");
+    error_log("Menu.php found, redirecting...");
     
     // Перенаправляем на страницу меню
-    $redirectUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/client/html/Menu.html';
+    $redirectUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/client/html/Menu.php';
     error_log("Redirecting to: " . $redirectUrl);
     header('Location: ' . $redirectUrl);
     exit();

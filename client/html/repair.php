@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->commit();
         echo "<script>
                 alert('Комплектующее успешно отремонтировано');
-                window.location.href = 'Menu.html';
+                window.location.href = 'Menu.php';
               </script>";
     } catch (Exception $e) {
         // В случае ошибки откатываем транзакцию

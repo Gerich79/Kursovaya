@@ -9,7 +9,7 @@
 <body>
     <div class="menu-up">
         <div class="left-section">
-            <a href="../Menu.html" class="back-button">← Назад</a>
+            <a href="../Menu.php" class="back-button">← Назад</a>
         </div>
         <h1 class="page-title">Материнские платы</h1>
     </div>

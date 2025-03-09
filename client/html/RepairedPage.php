@@ -28,7 +28,7 @@ if (!$result) {
     <div class="form-menu">
         <div class="menu-up">
             <div class="left-section">
-                <a href="Menu.html" class="back-button">← Назад</a>
+                <a href="Menu.php" class="back-button">← Назад</a>
             </div>
             <h1 class="page-title">Отремонтированные комплектующие</h1>
             <div class="tetx_container">

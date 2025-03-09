@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->execute()) {
             echo "<script>
                     alert('Оценка успешно добавлена');
-                    window.location.href = 'Menu.html';
+                    window.location.href = 'Menu.php';
                   </script>";
         } else {
             echo "<script>alert('Ошибка при добавлении оценки');</script>";
@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <button type="submit">Поставить оценку</button>
-            <button type="button" onclick="window.location.href='Menu.html'">Назад</button>
+            <button type="button" onclick="window.location.href='Menu.php'">Назад</button>
         </form>
     </div>
 

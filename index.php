@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Если пользователь уже авторизован, перенаправляем на Menu.html
+// Если пользователь уже авторизован, перенаправляем на Menu.php
 if (isset($_SESSION['user'])) {
-    header('Location: client/html/Menu.html');
+    header('Location: client/html/Menu.php');
     exit();
 }
 

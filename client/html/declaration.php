@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->execute()) {
         echo "<script>
                 alert('Заявление успешно добавлено');
-                window.location.href = 'Menu.html';
+                window.location.href = 'Menu.php';
               </script>";
     } else {
         echo "<script>alert('Ошибка при добавлении заявления');</script>";
@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <button type="submit">Отправить заявление</button>
-            <button type="button" onclick="window.location.href='Menu.html'">Назад</button>
+            <button type="button" onclick="window.location.href='Menu.php'">Назад</button>
         </form>
     </div>
 

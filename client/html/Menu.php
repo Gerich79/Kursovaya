@@ -1,3 +1,27 @@
+<?php
+// Настройки сессии
+ini_set('session.cookie_lifetime', 0); // Сессия завершится при закрытии браузера
+ini_set('session.gc_maxlifetime', 3600); // Максимальное время жизни сессии (1 час)
+session_start();
+
+// Проверка авторизации
+if (!isset($_SESSION['user'])) {
+    header('Location: ../../index.php');
+    exit();
+}
+
+// Получаем данные пользователя
+$user = $_SESSION['user'];
+
+// Получаем роль пользователя из базы данных
+require_once '../../server/db.php';
+$sql = "SELECT r.name as role_name 
+        FROM Users u 
+        JOIN Roles r ON u.id_role = r.id_role 
+        WHERE u.id_user = " . $user['id_user'];
+$result = $conn->query($sql);
+$role = $result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="rus">
 <head>
@@ -9,7 +33,7 @@
 <body>
     <div class="sidenav" id="mySidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="Messages.html"><img src="img/warning.png" alt="warning" class="menu-icon"> Сообщения</a>
+        <a href="Messages.php"><img src="img/warning.png" alt="warning" class="menu-icon"> Сообщения</a>
         <a href="AddUser.php"><img src="img/system.png" alt="system" class="menu-icon"> Управление профилями</a>
         <a href="form.html"><img src="img/system.png" alt="system" class="menu-icon"> Управление комплектующими</a>
         <a href="declaration.php"><img src="img/profile.png" alt="profile" class="menu-icon">Написать о поломке</a>
@@ -25,8 +49,8 @@
     <div class="form-menu">
         <div class="menu-up">
             <div class="tetx_container">
-                <p class="menu_text" id="login">Имя пользователя</p>
-                <p class="menu_text" id="role">Роль пользователя</p>
+                <p class="menu_text" id="login">Логин: <?php echo htmlspecialchars($user['login']); ?></p>
+                <p class="menu_text" id="role">Роль: <?php echo htmlspecialchars($role['role_name']); ?></p>
             </div>
         </div>
         <div class="category-menu">
@@ -42,4 +66,4 @@
     </div>
     <script src="../js/Menu.js"></script>
 </body>
-</html>
+</html> 

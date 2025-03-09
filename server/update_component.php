@@ -151,7 +151,7 @@ try {
             $_SESSION['message_type'] = 'success';
         }
         
-        header('Location: ../client/html/Menu.html');
+        header('Location: ../client/html/Menu.php');
     } else {
         throw new Exception("Ошибка при обновлении комплектующего: " . $stmt->error);
     }
