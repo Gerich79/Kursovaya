@@ -65,45 +65,206 @@ CREATE TABLE Removed (
 );
 
 Запросы 
-
-Дни с последней поломки
+--CountDateLastBreakdown
+SELECT
+    id_component,
+    DATEDIFF(CURDATE(), MAX(date_declaration)) AS count_date_last_breakdown
+FROM
+    Declarations
+GROUP BY
+    id_component;
+    
+--CountBreakdown
 SELECT 
-    DATEDIFF(CURRENT_DATE, MAX(date_declaration)) as days_since_last_breakdown
+    id_component,
+    COUNT(*) AS couunt_breakdown
 FROM 
     Declarations
-WHERE 
-    declaration LIKE '%поломка%';
+GROUP BY 
+    id_component;
 
-Общее количество поломок
+--AverageGrade
 SELECT 
-    COUNT(*) as total_breakdowns
+	id_component, 
+	AVG(grade) AS average_rating
 FROM 
-    Declarations
-WHERE 
-    declaration LIKE '%поломка%';
+	Rating
+GROUP BY 
+	id_component;
 
-Средняя оценка компонентов
-SELECT 
-    AVG(grade) as average_rating
-FROM 
-    Rating;
-
-Частота поломок
+--FailuresPerMonth
 SELECT 
     c.id_component,
-    c.name,
-    COUNT(d.id_declaration) as total_breakdowns,
+    c.name AS component_name,
+    cat.name AS category_name,
+    COUNT(DISTINCT d.id_declaration) as problem_count,
     DATEDIFF(CURRENT_DATE, c.date_added) as days_in_use,
-    CASE 
-        WHEN COUNT(d.id_declaration) = 0 THEN 0
-        ELSE ROUND(DATEDIFF(CURRENT_DATE, c.date_added) / COUNT(d.id_declaration), 2)
-    END as average_days_between_breakdowns
+    ROUND(
+        COUNT(DISTINCT d.id_declaration) / 
+        (DATEDIFF(CURRENT_DATE, c.date_added) / 30.0),
+        2
+    ) as failures_per_month
+FROM Components c
+INNER JOIN Categories cat 
+    ON c.id_categories = cat.id_categories
+LEFT JOIN Declarations d 
+    ON c.id_component = d.id_component
+WHERE c.id_component NOT IN (
+    SELECT id_component 
+    FROM Removed
+)
+GROUP BY 
+    c.id_component
+HAVING 
+    days_in_use > 0
+ORDER BY 
+    failures_per_month DESC;
+
+Логика расчета:
+problem_count - количество заявлений о неисправностях
+days_in_use - количество дней в эксплуатации
+failures_per_month - количество поломок в месяц (делим дни на 30 для перевода в месяцы)
+Чем выше значение failures_per_month:
+> 1 - компонент ломается чаще чем раз в месяц
+= 1 - компонент ломается примерно раз в месяц
+< 1 - компонент ломается реже чем раз в месяц
+Результаты отсортированы по убыванию частоты поломок, то есть сначала будут показаны самые проблемные компоненты.
+
+--AdditiveСriterion
+WITH MaxValues AS (
+    SELECT 
+        (SELECT MAX(average_rating) FROM AverageGrade) as max_rating,
+        (SELECT MAX(cost) FROM Components) as max_cost,
+        (SELECT MAX(couunt_breakdown) FROM CountBreakdown) as max_breakdowns,
+        (SELECT MAX(count_date_last_breakdown) FROM CountDateLastBreakdown) as max_days_since_breakdown,
+        (SELECT MAX(failures_per_month) FROM FailuresPerMonth) as max_failure_rate
+)
+SELECT 
+    c.id_component,
+    c.name AS component_name,
+    cat.name AS category_name,
+    ROUND(
+        (
+            -- Нормализованная средняя оценка * 0.5
+            (COALESCE(ag.average_rating, 0) / mv.max_rating * 0.5) +
+            -- Нормализованная цена * 1.0
+            (c.cost / mv.max_cost * 1.0) +
+            -- Нормализованное количество поломок * 1.0
+            (COALESCE(cb.couunt_breakdown, 0) / mv.max_breakdowns * 1.0) +
+            -- Нормализованные дни с последней поломки * 0.8
+            (COALESCE(cdlb.count_date_last_breakdown, 0) / mv.max_days_since_breakdown * 0.8) +
+            -- Нормализованный коэффициент надежности * 1.0
+            (COALESCE(fpm.failures_per_month, 0) / mv.max_failure_rate * 1.0)
+        ), 
+        2
+    ) AS additive_criterion
 FROM 
     Components c
-LEFT JOIN 
-    Declarations d ON c.id_component = d.id_component
-    AND d.declaration LIKE '%поломка%'
+    INNER JOIN Categories cat ON c.id_categories = cat.id_categories
+    CROSS JOIN MaxValues mv
+    LEFT JOIN AverageGrade ag ON c.id_component = ag.id_component
+    LEFT JOIN CountBreakdown cb ON c.id_component = cb.id_component
+    LEFT JOIN CountDateLastBreakdown cdlb ON c.id_component = cdlb.id_component
+    LEFT JOIN FailuresPerMonth fpm ON c.id_component = fpm.id_component
+WHERE 
+    c.id_component NOT IN (SELECT id_component FROM Removed)
+ORDER BY 
+    additive_criterion DESC;
+
+
+--Код для представлений
+CREATE VIEW CountDateLastBreakdown AS
+SELECT
+    id_component,
+    DATEDIFF(CURDATE(), MAX(date_declaration)) AS count_date_last_breakdown
+FROM
+    Declarations
+GROUP BY
+    id_component;
+
+CREATE VIEW CountBreakdown AS
+SELECT 
+    id_component,
+    COUNT(*) AS couunt_breakdown
+FROM 
+    Declarations
 GROUP BY 
-    c.id_component, c.name
+    id_component;
+
+CREATE VIEW AverageGrade AS
+SELECT 
+	id_component, 
+	AVG(grade) AS average_rating
+FROM 
+	Rating
+GROUP BY 
+	id_component;
+
+CREATE VIEW FailuresPerMonth AS
+SELECT 
+    c.id_component,
+    c.name AS component_name,
+    cat.name AS category_name,
+    COUNT(DISTINCT d.id_declaration) as problem_count,
+    DATEDIFF(CURRENT_DATE, c.date_added) as days_in_use,
+    ROUND(
+        COUNT(DISTINCT d.id_declaration) / 
+        (DATEDIFF(CURRENT_DATE, c.date_added) / 30.0),
+        2
+    ) as failures_per_month
+FROM Components c
+INNER JOIN Categories cat 
+    ON c.id_categories = cat.id_categories
+LEFT JOIN Declarations d 
+    ON c.id_component = d.id_component
+WHERE c.id_component NOT IN (
+    SELECT id_component 
+    FROM Removed
+)
+GROUP BY 
+    c.id_component
 HAVING 
-    total_breakdowns > 0;
+    days_in_use > 0
+ORDER BY 
+    failures_per_month DESC;
+
+CREATE VIEW AdditiveСriterion AS
+WITH MaxValues AS (
+    SELECT 
+        (SELECT MAX(average_rating) FROM AverageGrade) as max_rating,
+        (SELECT MAX(cost) FROM Components) as max_cost,
+        (SELECT MAX(couunt_breakdown) FROM CountBreakdown) as max_breakdowns,
+        (SELECT MAX(count_date_last_breakdown) FROM CountDateLastBreakdown) as max_days_since_breakdown,
+        (SELECT MAX(failures_per_month) FROM FailuresPerMonth) as max_failure_rate
+)
+SELECT 
+    c.id_component,
+    c.name AS component_name,
+    cat.name AS category_name,
+    ROUND(
+        (
+            -- Нормализованная средняя оценка * 0.5
+            (COALESCE(ag.average_rating, 0) / mv.max_rating * 0.5) +
+            -- Нормализованная цена * 1.0
+            (c.cost / mv.max_cost * 1.0) +
+            -- Нормализованное количество поломок * 1.0
+            (COALESCE(cb.couunt_breakdown, 0) / mv.max_breakdowns * 1.0) +
+            -- Нормализованные дни с последней поломки * 0.8
+            (COALESCE(cdlb.count_date_last_breakdown, 0) / mv.max_days_since_breakdown * 0.8) +
+            -- Нормализованный коэффициент надежности * 1.0
+            (COALESCE(fpm.failures_per_month, 0) / mv.max_failure_rate * 1.0)
+        ), 
+        2
+    ) AS additive_criterion
+FROM 
+    Components c
+    INNER JOIN Categories cat ON c.id_categories = cat.id_categories
+    CROSS JOIN MaxValues mv
+    LEFT JOIN AverageGrade ag ON c.id_component = ag.id_component
+    LEFT JOIN CountBreakdown cb ON c.id_component = cb.id_component
+    LEFT JOIN CountDateLastBreakdown cdlb ON c.id_component = cdlb.id_component
+    LEFT JOIN FailuresPerMonth fpm ON c.id_component = fpm.id_component
+WHERE 
+    c.id_component NOT IN (SELECT id_component FROM Removed)
+ORDER BY 
+    additive_criterion DESC;

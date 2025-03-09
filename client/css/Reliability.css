@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #393E41;
+    color: #D3D0CB;
+}
+
+.menu-up {
+    background-color: #587B7F;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-button {
+    color: #D3D0CB;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 16px;
+    background-color: #E2C044;
+    border-radius: 4px;
+    transition: opacity 0.3s;
+}
+
+.back-button:hover {
+    opacity: 0.9;
+}
+
+.page-title {
+    margin: 0;
+    color: #D3D0CB;
+    text-align: center;
+    flex-grow: 1;
+    font-weight: 500;
+}
+
+.table-container {
+    margin: 20px;
+    background-color: #587B7F;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reliability-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.reliability-table th, 
+.reliability-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #393E41;
+}
+
+.reliability-table th {
+    background-color: #393E41;
+    color: #D3D0CB;
+    font-weight: 500;
+}
+
+.reliability-table tr:hover {
+    background-color: rgba(211, 208, 203, 0.1);
+}
+
+.score-high {
+    color: #4CAF50;
+    font-weight: 500;
+}
+
+.score-medium {
+    color: #E2C044;
+    font-weight: 500;
+}
+
+.score-low {
+    color: #FF6B6B;
+    font-weight: 500;
+}
+
+.error-message {
+    color: #FF6B6B;
+    text-align: center;
+    padding: 20px;
+    font-weight: 500;
+} 

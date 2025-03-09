@@ -24,28 +24,6 @@ function getMaintenanceRecommendation($category, $dateAdded, $technicalCondition
 
     // Рекомендации по категориям и сроку службы (каждые 6 месяцев)
     switch ($category) {
-        case 'Видеокарты':
-            if ($monthsDiff >= 54) { // 4.5 года
-                $recommendation = "🔧 Рекомендуется полная диагностика и возможная замена вентиляторов";
-            } elseif ($monthsDiff >= 48) { // 4 года
-                $recommendation = "🌡️ Необходима проверка температурного режима под нагрузкой";
-            } elseif ($monthsDiff >= 42) { // 3.5 года
-                $recommendation = "🔧 Рекомендуется очистка от пыли и замена термопасты";
-            } elseif ($monthsDiff >= 36) { // 3 года
-                $recommendation = "📊 Проверка производительности и стабильности работы";
-            } elseif ($monthsDiff >= 30) { // 2.5 года
-                $recommendation = "🔍 Диагностика артефактов и проверка драйверов";
-            } elseif ($monthsDiff >= 24) { // 2 года
-                $recommendation = "🧹 Профилактическая очистка от пыли";
-            } elseif ($monthsDiff >= 18) { // 1.5 года
-                $recommendation = "🌡️ Проверка температурного режима";
-            } elseif ($monthsDiff >= 12) { // 1 год
-                $recommendation = "🔧 Рекомендуется замена термопасты";
-            } elseif ($monthsDiff >= 6) { // 6 месяцев
-                $recommendation = "💻 Обновление драйверов и прошивки";
-            }
-            break;
-
         case 'Процессоры':
             if ($monthsDiff >= 54) {
                 $recommendation = "⚡ Полная диагностика и стресс-тест";
@@ -68,25 +46,47 @@ function getMaintenanceRecommendation($category, $dateAdded, $technicalCondition
             }
             break;
 
-        case 'Жесткие диски':
+        case 'Видеокарты':
             if ($monthsDiff >= 54) {
-                $recommendation = "⚠️ Создание полной резервной копии данных";
+                $recommendation = "🔧 Рекомендуется полная диагностика и возможная замена вентиляторов";
             } elseif ($monthsDiff >= 48) {
-                $recommendation = "🔍 Проверка на битые сектора";
+                $recommendation = "🌡️ Необходима проверка температурного режима под нагрузкой";
             } elseif ($monthsDiff >= 42) {
-                $recommendation = "📊 Тест скорости чтения/записи";
+                $recommendation = "🔧 Рекомендуется очистка от пыли и замена термопасты";
             } elseif ($monthsDiff >= 36) {
-                $recommendation = "💾 Дефрагментация и очистка";
+                $recommendation = "📊 Проверка производительности и стабильности работы";
             } elseif ($monthsDiff >= 30) {
-                $recommendation = "🔍 Проверка SMART-параметров";
+                $recommendation = "🔍 Диагностика артефактов и проверка драйверов";
             } elseif ($monthsDiff >= 24) {
-                $recommendation = "💿 Резервное копирование важных данных";
+                $recommendation = "🧹 Профилактическая очистка от пыли";
             } elseif ($monthsDiff >= 18) {
-                $recommendation = "📊 Анализ состояния диска";
+                $recommendation = "🌡️ Проверка температурного режима";
             } elseif ($monthsDiff >= 12) {
-                $recommendation = "🧹 Очистка от временных файлов";
+                $recommendation = "🔧 Рекомендуется замена термопасты";
             } elseif ($monthsDiff >= 6) {
-                $recommendation = "📱 Проверка файловой системы";
+                $recommendation = "💻 Обновление драйверов и прошивки";
+            }
+            break;
+
+        case 'Материнские платы':
+            if ($monthsDiff >= 54) {
+                $recommendation = "⚡ Полная диагностика всех компонентов платы";
+            } elseif ($monthsDiff >= 48) {
+                $recommendation = "🔌 Проверка всех разъемов и портов";
+            } elseif ($monthsDiff >= 42) {
+                $recommendation = "🔋 Проверка и замена батарейки BIOS";
+            } elseif ($monthsDiff >= 36) {
+                $recommendation = "📊 Тестирование стабильности системы";
+            } elseif ($monthsDiff >= 30) {
+                $recommendation = "🔍 Проверка конденсаторов на вздутие";
+            } elseif ($monthsDiff >= 24) {
+                $recommendation = "💾 Обновление BIOS/UEFI";
+            } elseif ($monthsDiff >= 18) {
+                $recommendation = "🧹 Очистка слотов расширения";
+            } elseif ($monthsDiff >= 12) {
+                $recommendation = "🌡️ Проверка температурных режимов";
+            } elseif ($monthsDiff >= 6) {
+                $recommendation = "💻 Проверка работы всех портов";
             }
             break;
 
@@ -133,6 +133,72 @@ function getMaintenanceRecommendation($category, $dateAdded, $technicalCondition
                 $recommendation = "💾 Проверка XMP профилей";
             }
             break;
+
+        case 'Жёсткие диски':
+            if ($monthsDiff >= 54) {
+                $recommendation = "⚠️ Создание полной резервной копии данных";
+            } elseif ($monthsDiff >= 48) {
+                $recommendation = "🔍 Проверка на битые сектора";
+            } elseif ($monthsDiff >= 42) {
+                $recommendation = "📊 Тест скорости чтения/записи";
+            } elseif ($monthsDiff >= 36) {
+                $recommendation = "💾 Дефрагментация и очистка";
+            } elseif ($monthsDiff >= 30) {
+                $recommendation = "🔍 Проверка SMART-параметров";
+            } elseif ($monthsDiff >= 24) {
+                $recommendation = "💿 Резервное копирование важных данных";
+            } elseif ($monthsDiff >= 18) {
+                $recommendation = "📊 Анализ состояния диска";
+            } elseif ($monthsDiff >= 12) {
+                $recommendation = "🧹 Очистка от временных файлов";
+            } elseif ($monthsDiff >= 6) {
+                $recommendation = "📱 Проверка файловой системы";
+            }
+            break;
+
+        case 'Мониторы':
+            if ($monthsDiff >= 54) {
+                $recommendation = "🔍 Полная диагностика матрицы";
+            } elseif ($monthsDiff >= 48) {
+                $recommendation = "⚡ Проверка блока питания монитора";
+            } elseif ($monthsDiff >= 42) {
+                $recommendation = "🎨 Калибровка цветопередачи";
+            } elseif ($monthsDiff >= 36) {
+                $recommendation = "📊 Тест на битые пиксели";
+            } elseif ($monthsDiff >= 30) {
+                $recommendation = "🔌 Проверка кабелей подключения";
+            } elseif ($monthsDiff >= 24) {
+                $recommendation = "🧹 Профилактическая очистка";
+            } elseif ($monthsDiff >= 18) {
+                $recommendation = "💡 Проверка яркости и контрастности";
+            } elseif ($monthsDiff >= 12) {
+                $recommendation = "⚡ Проверка кнопок управления";
+            } elseif ($monthsDiff >= 6) {
+                $recommendation = "🖥️ Очистка экрана и корпуса";
+            }
+            break;
+
+        case 'Перефирия':
+            if ($monthsDiff >= 54) {
+                $recommendation = "⚠️ Рекомендуется полная замена устройств";
+            } elseif ($monthsDiff >= 48) {
+                $recommendation = "🔍 Проверка всех кнопок и клавиш";
+            } elseif ($monthsDiff >= 42) {
+                $recommendation = "🧹 Глубокая очистка механизмов";
+            } elseif ($monthsDiff >= 36) {
+                $recommendation = "⚡ Проверка кабелей на износ";
+            } elseif ($monthsDiff >= 30) {
+                $recommendation = "🔧 Чистка датчика мыши";
+            } elseif ($monthsDiff >= 24) {
+                $recommendation = "💻 Обновление драйверов";
+            } elseif ($monthsDiff >= 18) {
+                $recommendation = "🧹 Профилактическая чистка";
+            } elseif ($monthsDiff >= 12) {
+                $recommendation = "⌨️ Проверка работы всех клавиш";
+            } elseif ($monthsDiff >= 6) {
+                $recommendation = "🧼 Базовая очистка устройств";
+            }
+            break;
     }
 
     return $recommendation;
@@ -147,16 +213,20 @@ $query = "SELECT u.login, d.declaration, d.date_declaration, c.name as component
           JOIN Categories cat ON c.id_categories = cat.id_categories
           ORDER BY d.date_declaration DESC";
 
-// Получаем все комплектующие для проверки состояния
+// Изменим запрос для получения всех комплектующих
 $componentsQuery = "SELECT c.name, c.date_added, c.technical_conditions, cat.name as category_name
                    FROM Components c
-                   JOIN Categories cat ON c.id_categories = cat.id_categories";
+                   LEFT JOIN Categories cat ON c.id_categories = cat.id_categories
+                   WHERE c.id_component NOT IN (SELECT id_component FROM Removed)";
 
 $componentsResult = $conn->query($componentsQuery);
 $recommendations = [];
 
 if ($componentsResult) {
     while ($component = $componentsResult->fetch_assoc()) {
+        // Добавим отладочный вывод
+        echo "<!-- Категория из БД: " . $component['category_name'] . " -->";
+        
         $recommendation = getMaintenanceRecommendation(
             $component['category_name'],
             $component['date_added'],
@@ -165,6 +235,7 @@ if ($componentsResult) {
         if ($recommendation) {
             $recommendations[] = [
                 'component' => $component['name'],
+                'category' => $component['category_name'],
                 'recommendation' => $recommendation
             ];
         }
@@ -207,6 +278,7 @@ if (!$result) {
             <thead>
                 <tr>
                     <th>Комплектующее</th>
+                    <th>Категория</th>
                     <th>Рекомендация</th>
                 </tr>
             </thead>
@@ -214,6 +286,7 @@ if (!$result) {
                 <?php foreach ($recommendations as $rec): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($rec['component']); ?></td>
+                        <td><?php echo htmlspecialchars($rec['category']); ?></td>
                         <td><?php echo $rec['recommendation']; ?></td>
                     </tr>
                 <?php endforeach; ?>

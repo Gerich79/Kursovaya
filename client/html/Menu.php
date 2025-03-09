@@ -40,7 +40,7 @@ $role = $result->fetch_assoc();
         <a href="rating.php"><img src="img/profile.png" alt="profile" class="menu-icon">Выставить оценку комплектующему</a>
         <a href="DeletedPage.php"><img src="img/profile.png" alt="profile" class="menu-icon">Списанные комплектующие</a>
         <a href="RepairedPage.php"><img src="img/profile.png" alt="profile" class="menu-icon">Отремонтированные комплектующие</a>
-        <a href="DeletedPage.html"><img src="img/profile.png" alt="profile" class="menu-icon">Топ комплектующих</a>
+        <a href="Reliability.php"><img src="img/profile.png" alt="profile" class="menu-icon">Топ комплектующих</a>
         <a href="../../server/logout.php" style="color: #ff4444;"><img src="img/logout.png" alt="logout" class="menu-icon"> Выйти</a>
     </div>
 
