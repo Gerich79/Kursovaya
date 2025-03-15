@@ -1,8 +1,8 @@
---Роли
+-- Роли
 INSERT INTO roles (id_role, name, description) VALUES (1, 'Пользователь', 'Пользователь системы');
 INSERT INTO roles (id_role, name, description) VALUES (2, 'Администратор', 'Админ системы');
 
---Категории
+-- Категории
 INSERT INTO categories(id_categories, name)VALUES (1, 'Процессоры');
 INSERT INTO categories(id_categories, name)VALUES (2, 'Видеокарты');
 INSERT INTO categories(id_categories, name)VALUES (3, 'Материнские платы');
@@ -12,7 +12,7 @@ INSERT INTO categories(id_categories, name)VALUES (6, 'Жёсткие диски
 INSERT INTO categories(id_categories, name)VALUES (7, 'Мониторы');
 INSERT INTO categories(id_categories, name)VALUES (8, 'Перефирия');
 
---Пользователи
+-- Пользователи
 INSERT INTO users(id_user, login, password, id_role)VALUES (1, 'Боб', 11111111, 1);
 INSERT INTO users(id_user, login, password, id_role)VALUES (2, 'Боб1', 22222222, 1);
 INSERT INTO users(id_user, login, password, id_role)VALUES (3, 'Боб2', 33333333, 1);
@@ -20,6 +20,7 @@ INSERT INTO users(id_user, login, password, id_role)VALUES (4, 'Боб3', 444444
 INSERT INTO users(id_user, login, password, id_role)VALUES (5, 'Боб4', 55555555, 1);
 INSERT INTO users(id_user, login, password, id_role)VALUES (6, 'БобГлава', 66666666, 2);
 
+-- Комплектующие
 INSERT INTO Components (id_component, name, description, date_added, technical_conditions, cost, id_categories, adreess) VALUES 
 (2,'AMD Ryzen 9 7950X', 'Ядра: 16\nПотоки: 32\nБазовая частота: 4.5 GHz\nТурбо: до 5.7 GHz\nКэш L3: 64MB\nTDP: 170W', '2024-01-15', 'Рабочее', 62999.99, 1, 'Серверная 1, Стойка 3'),
 (3,'Intel Core i7-13700K', 'Ядра: 16 (8P + 8E)\nПотоки: 24\nБазовая частота: 3.4 GHz\nТурбо: до 5.4 GHz\nКэш L3: 30MB', '2024-02-01', 'Рабочее', 45999.99, 1, 'Серверная 2, Стойка 1'),
@@ -126,7 +127,7 @@ INSERT INTO removed(id_remove, date_remove, reason, id_component) VALUES
 (14, '2024-03-25', 'Выход из строя VRM зоны', 11),
 (15, '2024-03-30', 'Критическое повреждение памяти', 22);
 
---Заявления на ремонт
+-- Заявления на ремонт
 INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration, id_component) VALUES
 (11, 2, 'Сильный шум при работе вентилятора', '2024-03-15', 1),
 (12, 3, 'Артефакты на экране', '2024-03-15', 11), 
@@ -144,7 +145,7 @@ INSERT INTO declarations(id_declaration, id_user, declaration, date_declaration,
 (24, 4, 'Проблемы с форматированием', '2024-03-21', 31),
 (25, 5, 'Двойное срабатывание кнопок', '2024-03-22', 41);
 
---Оценки
+-- Оценки
 INSERT INTO rating(id_rating, id_component , id_user, grade) VALUES 
 (16, 5, 1, 9),  -- Оценка процессора Intel Core i5-13600K
 (17, 12, 2, 8), -- Оценка видеокарты NVIDIA GeForce RTX 4080
@@ -167,7 +168,7 @@ INSERT INTO rating(id_rating, id_component , id_user, grade) VALUES
 (34, 25, 4, 9), -- Оценка материнской платы MSI MPG B650 CARBON WIFI
 (35, 36, 5, 8); -- Оценка блока питания Seasonic Focus GX-750
 
---Отремонтированные
+-- Отремонтированные
 INSERT INTO repaired(id_repair, date_repair, description, id_component) VALUES 
 (6, '2024-03-01', 'Заменен кулер процессора, произведена замена термопасты', 1),
 (7, '2024-03-02', 'Перепрошивка BIOS видеокарты, замена термопрокладок', 11),

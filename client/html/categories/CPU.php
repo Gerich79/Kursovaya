@@ -45,7 +45,7 @@
                     </div>
                     <div class="cost-section">
                         <h3>Стоимость</h3>
-                        <input type="text" value="<?php echo number_format($row['cost'], 0, '', ' '); ?> ₽" readonly>
+                        <input type="text" name="component_cost" value="<?php echo number_format($row['cost'], 0, '', ' '); ?> ₽">
                     </div>
                     <div class="technical-status">
                         <div class="status-header">

@@ -88,21 +88,25 @@ body {
 }
 
 .btn-back {
-    width: 300px;
-    height: 100px;
-    border-radius: 10px;
-    background-color:#393E41;
-    border:none;
-    margin-top: 65px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-.btn-back:hover {
-    transition: color, transform 0.5s ease-in-out;
-    background: #E2C044;
-    transform: translateX(-50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #E2C044;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-.img1{
-    width: 30%;
-    height: 70%;
+.img1 {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Опционально, добавим эффект при наведении */
+.btn-back:hover {
+    opacity: 0.9;
 }

@@ -36,7 +36,30 @@ unset($_SESSION['message'], $_SESSION['message_type']);
                 <div class="top-row">
                     <div class="name-section">
                         <h2>Название комплектующего</h2>
-                        <input type="text" class="component-name" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
+                        <select name="name" class="component-name" id="componentSelect" required>
+                            <option value="">Выберите комплектующее</option>
+                            <?php
+                            // Подключение к базе данных
+                            $conn = new mysqli("localhost", "root", "", "DB1");
+                            
+                            if ($conn->connect_error) {
+                                die("Ошибка подключения: " . $conn->connect_error);
+                            }
+                            
+                            // Получаем список комплектующих
+                            $sql = "SELECT name FROM Components";
+                            $result = $conn->query($sql);
+                            
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    $selected = ($row['name'] === $name) ? 'selected' : '';
+                                    echo "<option value='" . htmlspecialchars($row['name']) . "' {$selected}>" . htmlspecialchars($row['name']) . "</option>";
+                                }
+                            }
+                            
+                            $conn->close();
+                            ?>
+                        </select>
                     </div>
                     <div class="category-select">
                         <h3>Категория</h3>
@@ -143,6 +166,10 @@ unset($_SESSION['message'], $_SESSION['message_type']);
                 e.target.value = 0;
             }
         });
+
+        function updateNameField(value) {
+            document.querySelector('input[name="name"]').value = value;
+        }
     </script>
 </body>
 </html> 

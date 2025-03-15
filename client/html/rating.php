@@ -6,8 +6,16 @@ if ($conn->connect_error) {
     die("Ошибка подключения: " . $conn->connect_error);
 }
 
-// Получаем список активных комплектующих
-$components_sql = "SELECT c.id_component, c.name 
+// Получаем список категорий из таблицы Components
+$categories_sql = "SELECT DISTINCT c.id_categories, cat.name as category_name 
+                  FROM Components c 
+                  JOIN Categories cat ON c.id_categories = cat.id_categories 
+                  LEFT JOIN Removed r ON c.id_component = r.id_component 
+                  WHERE r.id_remove IS NULL";
+$categories_result = $conn->query($categories_sql);
+
+// Получаем список активных комплектующих с их категориями
+$components_sql = "SELECT c.id_component, c.name, c.id_categories 
                   FROM Components c 
                   LEFT JOIN Removed r ON c.id_component = r.id_component 
                   WHERE r.id_remove IS NULL";
@@ -81,13 +89,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div>
+                <label for="category">Категория:</label>
+                <select id="category" name="category" onchange="filterComponents()">
+                    <option value="">Все категории</option>
+                    <?php
+                    if ($categories_result && $categories_result->num_rows > 0) {
+                        while($row = $categories_result->fetch_assoc()) {
+                            echo "<option value='" . $row['id_categories'] . "'>" 
+                                 . htmlspecialchars($row['category_name']) . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <div>
                 <label for="component">Комплектующее:</label>
                 <select id="component" name="component" required>
                     <option value="">Выберите комплектующее</option>
                     <?php
-                    if ($components_result->num_rows > 0) {
+                    if ($components_result && $components_result->num_rows > 0) {
                         while($row = $components_result->fetch_assoc()) {
-                            echo "<option value='" . $row['id_component'] . "'>" . $row['name'] . "</option>";
+                            echo "<option value='" . $row['id_component'] . "' data-category='" 
+                                 . $row['id_categories'] . "'>" 
+                                 . htmlspecialchars($row['name']) . "</option>";
                         }
                     }
                     ?>
@@ -111,6 +136,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (value < 1) this.value = 1;
             if (value > 10) this.value = 10;
         });
+
+        function filterComponents() {
+            const categorySelect = document.getElementById('category');
+            const componentSelect = document.getElementById('component');
+            const selectedCategory = categorySelect.value;
+
+            // Получаем все опции комплектующих
+            const options = componentSelect.getElementsByTagName('option');
+
+            // Показываем первую опцию (placeholder)
+            options[0].style.display = '';
+
+            // Фильтруем остальные опции
+            for (let i = 1; i < options.length; i++) {
+                const option = options[i];
+                if (!selectedCategory || option.getAttribute('data-category') === selectedCategory) {
+                    option.style.display = '';
+                } else {
+                    option.style.display = 'none';
+                }
+            }
+
+            // Сбрасываем выбор комплектующего
+            componentSelect.value = '';
+        }
     </script>
 
     <?php $conn->close(); ?>

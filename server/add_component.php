@@ -71,4 +71,4 @@ try {
     header('Location: ../client/html/form.html');
 }
 
-exit(); 
+exit();
