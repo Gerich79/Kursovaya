@@ -67,6 +67,24 @@ $result = $conn->query($query);
         <div class="text_container"></div>
     </div>
 
+    <div class="filters">
+        <input type="text" id="searchInput" placeholder="Поиск по названию..." class="search-input">
+        <select id="categoryFilter" class="category-filter">
+            <option value="">Все категории</option>
+            <?php
+            $categoryQuery = "SELECT DISTINCT cat.name FROM Categories cat 
+                            INNER JOIN Components c ON cat.id_categories = c.id_categories 
+                            WHERE c.id_component NOT IN (SELECT id_component FROM Removed)
+                            ORDER BY cat.name";
+            $categoryResult = $conn->query($categoryQuery);
+            while ($category = $categoryResult->fetch_assoc()) {
+                echo "<option value='" . htmlspecialchars($category['name']) . "'>" . 
+                     htmlspecialchars($category['name']) . "</option>";
+            }
+            ?>
+        </select>
+    </div>
+
     <div class="table-container">
         <?php if ($result && $result->num_rows > 0): ?>
             <table class="reliability-table">
@@ -114,5 +132,33 @@ $result = $conn->query($query);
     </div>
 
     <?php $conn->close(); ?>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const table = document.querySelector('.reliability-table');
+            const rows = table.getElementsByTagName('tr');
+
+            function filterTable() {
+                const searchText = searchInput.value.toLowerCase();
+                const selectedCategory = categoryFilter.value.toLowerCase();
+
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    const name = row.cells[0].textContent.toLowerCase();
+                    const category = row.cells[1].textContent.toLowerCase();
+                    
+                    const matchesSearch = name.includes(searchText);
+                    const matchesCategory = !selectedCategory || category === selectedCategory;
+
+                    row.style.display = (matchesSearch && matchesCategory) ? '' : 'none';
+                }
+            }
+
+            searchInput.addEventListener('input', filterTable);
+            categoryFilter.addEventListener('change', filterTable);
+        });
+    </script>
 </body>
 </html> 

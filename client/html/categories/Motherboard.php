@@ -20,7 +20,9 @@
         $sql = "SELECT c.*, cat.name as category_name 
                 FROM Components c 
                 JOIN Categories cat ON c.id_categories = cat.id_categories 
-                WHERE cat.name = 'Материнские платы'";
+                WHERE cat.name = 'Материнские платы'
+                AND c.id_component NOT IN (SELECT id_component FROM Removed)
+                ORDER BY c.name";
         
         $result = $conn->query($sql);
 

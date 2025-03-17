@@ -72,7 +72,19 @@ function deleteUser() {
     }
     
     if (confirm('Вы уверены, что хотите удалить этого пользователя?')) {
-        window.location.href = `../../server/delete_user.php?login=${encodeURIComponent(login)}`;
+        fetch(`../../server/delete_user.php?login=${encodeURIComponent(login)}`)
+            .then(response => response.text())
+            .then(data => {
+                if (data.includes('success')) {
+                    alert('Пользователь успешно удален');
+                    location.reload();
+                } else {
+                    alert('Произошла ошибка при удалении пользователя: ' + data);
+                }
+            })
+            .catch(error => {
+                alert('Произошла ошибка: ' + error);
+            });
     }
 }
 
